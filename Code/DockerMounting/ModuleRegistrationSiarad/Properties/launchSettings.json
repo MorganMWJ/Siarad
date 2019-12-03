@@ -21,7 +21,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/modules",
-      //"applicationUrl": "https://localhost:5001;http://localhost:5000",
+      //"applicationUrl": "https://localhost:8101;http://localhost:8100",
       "applicationUrl": "https://m56-docker1.dcs.aber.ac.uk:8101;http://m56-docker1.dcs.aber.ac.uk:8100",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

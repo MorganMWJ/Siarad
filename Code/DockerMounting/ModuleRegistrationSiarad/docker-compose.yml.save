@@ -1,0 +1,29 @@
+version: "3"
+services:
+  webapi:
+    image: module-registration:latest 
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "1234:80"
+    networks:
+      - webnet
+  services:
+    image: httpclientmvc-dop2:latest
+    environment:
+      - ABER_EXAMPLE_HOSTNAME=http://webapi/
+    ports:
+      - "2345:80"
+    networks:
+      - webnet
+networks:
+  webnet:
+
+
+

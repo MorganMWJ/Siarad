@@ -35,6 +35,10 @@ namespace ModuleRegistrationSiarad.Controllers
         {
             _context = context;
         }
+	[HttpGet("test")]
+	public ActionResult<String> test(){
+	return Ok("Test");
+	}
         [HttpGet("year/{year}")]
         public ActionResult<Module> GetModulesForSpecificYear(String year)
         {

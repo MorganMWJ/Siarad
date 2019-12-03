@@ -1,0 +1,33 @@
+version: "3"
+services:
+  ModuleRegistrationSiarad:
+    image: "module-registration:latest"
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8100:80"
+    networks:
+      - webnet
+  db:
+    image: "postgres:latest"
+    ports:
+      - "5300:5432"
+    networks:
+      - webnet
+    environment:
+        POSTGRES_HOST: 'db'
+        POSTGRES_DATABASE: 'ModuleRegistration'
+        POSTGRES_USER: 'admin'
+        POSTGRES_PASSWORD: 'admin'
+networks:
+  webnet:
+        external: true
+
+
+
