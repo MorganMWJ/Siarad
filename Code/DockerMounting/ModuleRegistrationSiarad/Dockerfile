@@ -1,13 +1,23 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build-env
+#Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
+#For more information, please see https://aka.ms/containercompat
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-nanoserver-1903 AS base
 WORKDIR /app
+EXPOSE 80
+EXPOSE 443
 
-COPY *.csproj ./
-RUN dotnet restore
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2-nanoserver-1903 AS build
+WORKDIR /src
+COPY ["ModuleRegistrationSiarad/ModuleRegistrationSiarad.csproj", "ModuleRegistrationSiarad/"]
+RUN dotnet restore "ModuleRegistrationSiarad/ModuleRegistrationSiarad.csproj"
+COPY . .
+WORKDIR "/src/ModuleRegistrationSiarad"
+RUN dotnet build "ModuleRegistrationSiarad.csproj" -c Release -o /app
 
-COPY . ./
-RUN dotnet publish -c Release -o out
+FROM build AS publish
+RUN dotnet publish "ModuleRegistrationSiarad.csproj" -c Release -o /app
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
+FROM base AS final
 WORKDIR /app
-COPY --from=build-env /app/out ./
-ENTRYPOINT [ "dotnet", "ModuleRegistrationSiarad.dll" ]
+COPY --from=publish /app .
+ENTRYPOINT ["dotnet", "ModuleRegistrationSiarad.dll"]

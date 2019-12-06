@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,6 +13,7 @@ namespace ModuleRegistrationSiarad.Models
         [Key]
         public virtual int auto_id { get; set; }
         [ForeignKey("module_id, year")]
+        [JsonIgnore]
         [NotMapped]
         public virtual Module Module { get; set; }
         [Required]
