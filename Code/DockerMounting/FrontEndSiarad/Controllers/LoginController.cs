@@ -21,7 +21,7 @@ namespace FrontEndSiarad.Controllers
         [HttpPost]
         public IActionResult Login([Bind("Username,Password")] Login loginInput)
         {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"loginInfo.txt");
+            string path = Path.Combine(Path.GetDirectoryName(Environment.CurrentDirectory), @"loginInfo.txt");
             StreamReader sr = new StreamReader(path);
             Dictionary<string, string> loginDetails = new Dictionary<string, string>();
             while (!sr.EndOfStream)
