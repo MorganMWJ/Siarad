@@ -1,3 +1,0 @@
-#!/bin/sh
-docker stop dd-dop2
-docker rm dd-dop2

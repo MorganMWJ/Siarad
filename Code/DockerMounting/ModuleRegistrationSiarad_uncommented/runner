@@ -1,3 +1,0 @@
-#!/bin/sh
-docker build -t module-registration .
-docker run -d -p 8100:80 --name dd-dop2 module-registration

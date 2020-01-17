@@ -1,3 +1,0 @@
-#!/bin/sh
-docker stop nf-mwj7
-docker rm nf-mwj7

@@ -1,3 +1,0 @@
-#!/bin/sh
-docker build -t notifications .
-docker run -d -p 8200:80 --name nf-mwj7 notifications
